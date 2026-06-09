@@ -15,7 +15,7 @@ function crearLista() {
 }
 
 // ============================================================
-// Pruebas de integración — manipulación del DOM
+// Pruebas de integraci�n ? manipulaci�n del DOM
 // ============================================================
 describe('crearTareaElemento', () => {
   it('debe crear un elemento <li> con la clase "tarea-item"', () => {
@@ -34,13 +34,19 @@ describe('agregarTarea', () => {
     lista = crearLista();
   });
 
-  it('debe agregar un <li> a la lista cuando el texto es válido', () => {
+  it('debe agregar un <li> a la lista cuando el texto es v�lido', () => {
     const resultado = agregarTarea('Aprender vitest', lista);
     expect(resultado.exito).toBe(true);
     expect(lista.children.length).toBe(1);
     expect(lista.querySelector('.tarea-texto').textContent).toBe('Aprender vitest');
   });
 
+  it('debe formatear el texto antes de agregarlo', () => {
+    const lista = crearLista();
+    agregarTarea('  hOLA MUNDO  ', lista);
+    const li = lista.querySelector('.tarea-item');
+    expect(li.querySelector('.tarea-texto').textContent).toBe('Hola mundo');
+  });
   
 });
 
@@ -56,7 +62,7 @@ describe('eliminarTarea', () => {
 });
 
 describe('alternarTarea', () => {
-  it('debe agregar la clase "completada" cuando el checkbox está marcado', () => {
+  it('debe agregar la clase "completada" cuando el checkbox est� marcado', () => {
     const li = crearTareaElemento('Tarea test');
     const checkbox = li.querySelector('.tarea-checkbox');
     checkbox.checked = true;
@@ -90,7 +96,7 @@ describe('limpiarCompletadas', () => {
 });
 
 describe('actualizarContador', () => {
-  it('debe mostrar "0 tareas" cuando la lista está vacía', () => {
+  it('debe mostrar "0 tareas" cuando la lista est� vac�a', () => {
     const lista = crearLista();
     const contenedor = document.createElement('span');
 
@@ -100,7 +106,7 @@ describe('actualizarContador', () => {
 
   it('debe mostrar "1 tarea" cuando hay exactamente un elemento', () => {
     const lista = crearLista();
-    agregarTarea('Única tarea', lista);
+    agregarTarea('�nica tarea', lista);
     const contenedor = document.createElement('span');
 
     actualizarContador(lista, contenedor);
